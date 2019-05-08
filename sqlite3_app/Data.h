@@ -5,7 +5,7 @@
 typedef  int SQLSTRLEN;
 
 #define ASSERT_DEBUG(flag)  do {assert(flag);\
-									} while(0)
+                                } while(0)
 
 #define SQLOP_INSERT  0 
 #define SQLOP_DELETE  1 
@@ -22,37 +22,37 @@ typedef  int SQLSTRLEN;
 
 typedef struct
 {
-	SBYTE sName;
-	const char *cName;
-	int sColNum;
+    SBYTE sName;
+    const char *cName;
+    int sColNum;
 }SQL_TABLE_S;
 
 typedef struct
 {
-	SBYTE sName;
-	const char *url;
+    SBYTE sName;
+    const char *url;
 }SQL_DATABASE_S;
 
 typedef struct
 {
-	SBYTE sName;
-	int DLT698Type;
-	const char *cName;
-	const char *type;
-	const char *format;
+    SBYTE sName;
+    int DLT698Type;
+    const char *cName;
+    const char *type;
+    const char *format;
 }SQL_COL_S;
 
 /*==================================*/
 typedef struct
 {
-	SBYTE sName;
-	const char *cName;
+    SBYTE sName;
+    const char *cName;
 }SQLDATA_TABLE_S;
 
 enum
 {
-	DB_VAR_ESAM,
-	DB_END,
+    DB_VAR_ESAM,
+    DB_END,
 };
 
 
@@ -60,16 +60,16 @@ enum{VAR_ESAM_MAINTB,};
 
 typedef struct
 {
-	int idx;
-	const char *oi;
+    int idx;
+    const char *oi;
 }OI_ENUM_S;
 
 
 typedef struct
 {
-	SBYTE dbname;
-	SBYTE cName;
-	BOOL	(*pInit)();
+    SBYTE dbname;
+    SBYTE cName;
+    BOOL    (*pInit)();
 }TBINIT_PFUNC;
 
 #endif
