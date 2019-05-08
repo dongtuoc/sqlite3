@@ -6,11 +6,11 @@ MUTEX DB_VAR_ESAM_CTRL;
 
 const SQL_DATABASE_S SQL_DB[]=
 {
-    {DB_VAR_ESAM,		PATHNAME_SQLVAR"/esam.db3"},
+    {DB_VAR_ESAM,   PATHNAME_SQLVAR"/esam.db3"},
 };
 
 const SQL_TABLE_S DBVAR_ESAM_TABLE[]={
-    {VAR_ESAM_MAINTB,			"esam",			ESAM_COL_END},
+    {VAR_ESAM_MAINTB,   "esam", ESAM_COL_END},
 }; 
 
 const SQL_COL_S TB_ColSet_ESAM[] = {
@@ -49,11 +49,10 @@ static int SQL_Close_(SBYTE dbname,sqlite3 *dbhandle)
     BOOL res = FALSE;
 
     if (!dbhandle) return ret;
-
     switch(dbname)
     {
         case DB_VAR_ESAM:   res = SQL_MutexUnLock_(&DB_VAR_ESAM_CTRL);break;
-        default:	break;
+        default:    break;
     }
 
     if (!res)
