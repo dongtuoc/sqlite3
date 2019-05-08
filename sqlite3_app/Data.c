@@ -6,21 +6,21 @@ MUTEX DB_VAR_ESAM_CTRL;
 
 const SQL_DATABASE_S SQL_DB[]=
 {
-	{DB_VAR_ESAM,		PATHNAME_SQLVAR"/esam.db3"},
+    {DB_VAR_ESAM,		PATHNAME_SQLVAR"/esam.db3"},
 };
 
 const SQL_TABLE_S DBVAR_ESAM_TABLE[]={
-	{VAR_ESAM_MAINTB,			"esam",			ESAM_COL_END},
+    {VAR_ESAM_MAINTB,			"esam",			ESAM_COL_END},
 }; 
 
 const SQL_COL_S TB_ColSet_ESAM[] = {
-	{ESAM_COL_OI,data_long_unsigned,"OI","varchar(8)","\"%s\""},
-	{ESAM_COL_TEXT,data_structure,"DataSet","varchar(512)","\"%s\""},
+    {ESAM_COL_OI,data_long_unsigned,"OI","varchar(8)","\"%s\""},
+    {ESAM_COL_TEXT,data_structure,"DataSet","varchar(512)","\"%s\""},
 };
 
 const OI_ENUM_S TB_RowSet_ESAM[] = {
-	{ESAM_ROW_F100,"OIF100"},
-	{ESAM_ROW_F101,"OIF101"},
+    {ESAM_ROW_F100,"OIF100"},
+    {ESAM_ROW_F101,"OIF101"},
 };
 
 #ifndef _SQL_STATIC_
@@ -32,81 +32,78 @@ static int _MeasurePoint_Num_ = 0;
 
 static BOOL SQL_MutexUnLock_(MUTEX *pMutex)
 {
-	assert(pMutex);
-	return OsPackThreadMutexUnlock(pMutex);
+    assert(pMutex);
+    return OsPackThreadMutexUnlock(pMutex);
 }
 
 static BOOL SQL_MutexLock_(MUTEX *pMutex)
 {	
-	assert(pMutex);
-	return OsPackThreadMutexLock(pMutex,500);
+    assert(pMutex);
+    return OsPackThreadMutexLock(pMutex,500);
 }
 
 /* UnLock when dbhandle is not a NULL */
 static int SQL_Close_(SBYTE dbname,sqlite3 *dbhandle)
 {
-	int ret = sqlite3_close(dbhandle);
-	BOOL res = FALSE;
+    int ret = sqlite3_close(dbhandle);
+    BOOL res = FALSE;
 
-	if (!dbhandle) return ret;
-	
-	switch(dbname)
-	{
-		case DB_VAR_ESAM: 	res = SQL_MutexUnLock_(&DB_VAR_ESAM_CTRL);break;
-		default:	break;
-	}
+    if (!dbhandle) return ret;
 
-	if (!res)
-		return SQLITE_ERROR;	
-	return ret;
+    switch(dbname)
+    {
+        case DB_VAR_ESAM:   res = SQL_MutexUnLock_(&DB_VAR_ESAM_CTRL);break;
+        default:	break;
+    }
+
+    if (!res)
+        return SQLITE_ERROR;	
+    return ret;
 }
 
 /* first Lock, then open database */
 static sqlite3 *SQL_Connect_(SBYTE dbname)
 {
-	sqlite3 *dbhandle 	= NULL;
-	MUTEX *pMutex 		= NULL;
-	SBYTE ret 			= 0; 
+    sqlite3 *dbhandle 	= NULL;
+    MUTEX *pMutex 		= NULL;
+    SBYTE ret 			= 0; 
 
-	switch(dbname)
-	{
-		case DB_VAR_ESAM: 			pMutex = &DB_VAR_ESAM_CTRL;break;
-		default:	return NULL;
-	}
+    switch(dbname)
+    {
+        case DB_VAR_ESAM:   pMutex = &DB_VAR_ESAM_CTRL;break;
+        default:    return NULL;
+    }
 
-	if(!SQL_MutexLock_(pMutex))
-		return NULL;
-	
-	ret = sqlite3_open(SQL_DB[dbname].url,&dbhandle);
-	if ((ret != SQLITE_OK) || (dbhandle == NULL))
-	{
-		SQL_MutexUnLock_(pMutex);
-		return NULL;
-	}
-	return dbhandle;
+    if(!SQL_MutexLock_(pMutex))
+        return NULL;
+
+    ret = sqlite3_open(SQL_DB[dbname].url,&dbhandle);
+    if ((ret != SQLITE_OK) || (dbhandle == NULL))
+    {
+        SQL_MutexUnLock_(pMutex);
+        return NULL;
+    }
+    return dbhandle;
 }
 
 static const SQL_TABLE_S *SQL_GetTable_(SBYTE dbname,SBYTE sName)
 {
-	const SQL_TABLE_S *ptable = NULL;
-	SBYTE len = 0;
+    const SQL_TABLE_S *ptable = NULL;
+    SBYTE len = 0;
 
-	switch(dbname)
-	{
-		case DB_VAR_ESAM:
-			ptable = DBVAR_ESAM_TABLE;
-			len = sizeof(DBVAR_ESAM_TABLE)/sizeof(DBVAR_ESAM_TABLE[0]);
-			break;
-		default:
-			return NULL;
-	}
+    switch(dbname)
+    {
+    case DB_VAR_ESAM:
+        ptable = DBVAR_ESAM_TABLE;
+        len = sizeof(DBVAR_ESAM_TABLE)/sizeof(DBVAR_ESAM_TABLE[0]);
+        break;
+    default:
+        return NULL;
+    }
 
-	if (sName >= len)
-	{
-		return NULL;
-	}
-
-	return ptable + sName;
+    if (sName >= len)
+        return NULL;
+    return ptable + sName;
 }
 
 static int SQL_GetTable_sColNum_(SBYTE dbname,SBYTE sName)
@@ -266,7 +263,7 @@ static int SQL_CallbackGetInt_(int *para,int ncolumn,char ** columnvalue,char *c
 	return 0;
 }
 
-/*获取2字节长度数据*/
+/*禄帽脠隆2脳脰陆脷鲁陇露脠脢媒戮脻*/
 static int SQL_CallbackGetSmallInt_(unsigned short *para,int ncolumn,char ** columnvalue,char *columnname[])
 {
 	SWORD len = 0;
