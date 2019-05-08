@@ -42,20 +42,13 @@ typedef struct
     const char *format;
 }SQL_COL_S;
 
-/*==================================*/
 typedef struct
 {
     SBYTE sName;
     const char *cName;
 }SQLDATA_TABLE_S;
 
-enum
-{
-    DB_VAR_ESAM,
-    DB_END,
-};
-
-
+enum{DB_VAR_ESAM,DB_END,};
 enum{VAR_ESAM_MAINTB,};
 
 typedef struct
@@ -63,7 +56,6 @@ typedef struct
     int idx;
     const char *oi;
 }OI_ENUM_S;
-
 
 typedef struct
 {
